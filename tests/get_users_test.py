@@ -1,5 +1,5 @@
 from statuses import Status
-from utils.Api import Api
+from utils.api import Api
 from model.user_search import UserSearch
 from allure_commons._allure import step
 import os
