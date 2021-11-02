@@ -1,12 +1,7 @@
-from statuses import Status
+from status_codes import Status
 from utils.api import Api
 from model.user_search import UserSearch
 from allure_commons._allure import step
-import os
-
-# {'meta': {'pagination': {'total': 1510, 'pages': 76, 'page': 1, 'limit': 20,
-# 'links': {'previous': None, 'current': 'https://gorest.co.in/public/v1/users?page=1', 'next': 'https://gorest.co.in/public/v1/users?page=2'}}},
-# 'data': [{'id': 67, 'name': 'Chandraayan Kakkar', 'email': 'kakkar_chandraayan@tillman.org', 'gender': 'male', 'status': 'active'},
 
 
 class TestGetUsers:
@@ -17,8 +12,6 @@ class TestGetUsers:
         response_content = response.json()
         total_users = response_content["meta"]["pagination"]["total"]
         total_pages = response_content["meta"]["pagination"]["pages"]
-
-
 
     @staticmethod
     def test_get_users_first_page():

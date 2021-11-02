@@ -42,6 +42,3 @@ class UserSearch:
         for field in fields:
             params_string += field + "=" + str(fields[field]) + '&'
         return params_string[:-1]  # if string should be empty it will cut '?', otherwise it will cut last added '&'
-
-    def test(self):
-        print(self.__dict__)

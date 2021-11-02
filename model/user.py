@@ -17,7 +17,13 @@ class User:
         self.gender = gender
         self.status = status
 
-    def __eq__(self, other, ignore_id=False):
+    def compare(self, other, ignore_id=False):
+        """
+        Compares two users field by field
+        :param other: other user to compare
+        :param ignore_id: should 'id' fields of users be compared or ignored
+        :return: True if users are equal, False - otherwise
+        """
         if not isinstance(other, User):
             return False
 
@@ -29,11 +35,26 @@ class User:
 
         return comparison
 
+    def get_json(self):
+        """
+        Returns user in a view of json dictionary that could be passed to request body. 'Id' field is not included
+        :return: Json dictionary view of user object without id
+        """
+        json = {"name": self.name,
+                "email": self.email,
+                "gender": self.gender,
+                "status": self.status}
+        return json
+
     def __str__(self):
         return f"id: {self.id}\nname: {self.name}\nemail: {self.email}\ngender: {self.gender}\nstatus: {self.status}"
 
 
 def create_random_user():
+    """
+    Generates random user
+    :return: User object with randomly filled in fields
+    """
     random_names = [
         "Epifania Ornellas",
         "Derrick Heuer",
@@ -54,7 +75,12 @@ def create_random_user():
     return User(name, email, gender, status)
 
 
-def create_user_from_response(response):
+def create_users_from_response(response):
+    """
+    Generates list of user objects provided in response to GET user request
+    :param response: Response object to GET user method
+    :return: List of user objects provided in response to GET user request
+    """
     users = []
     users_dict = response.json()["data"]
     for user_item in users_dict:
@@ -64,5 +90,4 @@ def create_user_from_response(response):
         gender = user_item["gender"]
         status = user_item["status"]
         users.append(User(name, email, gender, status, id))
-
     return users

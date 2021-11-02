@@ -1,14 +1,9 @@
 import requests
 import configparser
-import os
 from utils.json_fixture import JSONFixture
 
 
-# {"id":11060,"name":"2AbbieMiller","email":"2AbbieMiller@test.com","gender":"female","status":"active"}
-
-
 class Api:
-    print("<" * 80 + os.getcwd() + ">" * 80)
     parser = configparser.ConfigParser()
     parser.read("config.ini")
 
@@ -42,6 +37,14 @@ class Api:
     def get_todos(page=None):
         # https://gorest.co.in/public/v1/todos
         pass
+
+    @staticmethod
+    def create_user_generic(body, headers=JSONFixture.get_headers(TOKEN)):
+        # POST /public/v1/users
+        response = requests.post(url=Api.CREATE_USER_URL,
+                                 json=body,
+                                 headers=headers)
+        return response
 
     @staticmethod
     def create_user(user):

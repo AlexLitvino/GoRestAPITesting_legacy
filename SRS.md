@@ -4,21 +4,25 @@
 Go Rest service (will be referenced as Service below) provides possibility to perform CRUD operations for users, posts, comments and TODOs  
 
 ## Users operation
-[SRS] Service shall provide possibility to create new user.  
-[SRS] User shall contain the following fields: id, name, email, gender, status  
+[SRS_1] Service shall provide possibility to create new user.  
+[SRS_2] Service shall forbid create user without authorization.  
+
 ### User fields
-[SRS] Id field shall be mandatory, integer, autoincremented.  
-[SRS] Name field shall be mandatory string.  
-[SRS] Email shall be mandatory string.  
-[SRS] Gender shall be mandatory string 'male' or 'female'.  
-[SRS] Status field shall be mandatory string 'active' or 'inactive'.  
+[SRS_3] Id field shall be autoincremented integer.  
+[SRS_4] Name field shall be mandatory string.  
+[SRS_5] Email shall be mandatory string.  
+[SRS_6] Gender shall be mandatory string 'male' or 'female'.  
+[SRS_7] Status field shall be mandatory string 'active' or 'inactive'.  
+[SRS_8] Email should be unique.  
 ******TODO:** need clarification 
 - Should server check email syntax?
 - What limitations to name and email length?
 - What type of integer for id? 
-- If created previously created user was deleted, could his id be taken for new user?  
-[SRS] Service shall provide possibility to search users by any of user fields.
+- If previously created user was deleted, could his id be taken for new user?  
 
+### User search
+[SRS] Service shall provide possibility to search users by any of user fields.
+[SRS] User shall contain the following fields: id, name, email, gender, status  
 
 
 Resources
