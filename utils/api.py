@@ -1,15 +1,9 @@
 import requests
-import configparser
-from utils.json_fixture import JSONFixture
+from utils.config_parser import BASE_URL
+from utils.headers import HEADERS_WITH_AUTHORIZATION
 
 
 class Api:
-    parser = configparser.ConfigParser()
-    parser.read("config.ini")
-
-    # Gorest endpoints
-    BASE_URL = parser.get("gorest", "url")
-    TOKEN = parser.get("gorest", "token")
 
     GET_USERS_URL = BASE_URL + "/public/v1/users"
     CREATE_USER_URL = BASE_URL + "/public/v1/users"
@@ -39,7 +33,7 @@ class Api:
         pass
 
     @staticmethod
-    def create_user_generic(body, headers=JSONFixture.get_headers(TOKEN)):
+    def create_user_generic(body, headers=HEADERS_WITH_AUTHORIZATION):
         # POST /public/v1/users
         response = requests.post(url=Api.CREATE_USER_URL,
                                  json=body,
@@ -56,7 +50,7 @@ class Api:
 
         response = requests.post(url=Api.CREATE_USER_URL,
                                  json=body,
-                                 headers=JSONFixture.get_headers(Api.TOKEN))
+                                 headers=HEADERS_WITH_AUTHORIZATION)
         return response
 
     @staticmethod

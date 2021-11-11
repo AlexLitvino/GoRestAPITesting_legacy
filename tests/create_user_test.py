@@ -1,5 +1,6 @@
 from status_codes import Status
 from utils.api import Api
+from utils.headers import HEADERS_WITHOUT_AUTHORIZATION
 from model.user import create_random_user, create_users_from_response
 from model.user_search import UserSearch
 from resources import Resources
@@ -31,12 +32,10 @@ class TestCreateUser:
         assert id2 == id1 + 1
 
     @staticmethod
-    def test_user_is_not_created_without_authentication(headers_without_authorization):
+    def test_user_is_not_created_without_authentication():
         user = create_random_user()
         body = user.get_json()
-        #headers = {"Accept": "application/json",
-        #           "Content-Type": "application/json"}
-        response = Api.create_user_generic(body, headers=headers_without_authorization)
+        response = Api.create_user_generic(body, headers=HEADERS_WITHOUT_AUTHORIZATION)
         assert Status.UNAUTHORIZED == response.status_code
         response = Api.get_users(UserSearch(user))
         assert [] == response.json()["data"]
